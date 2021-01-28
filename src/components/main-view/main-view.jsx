@@ -10,13 +10,13 @@ export class MainView extends React.Component {
     super();
 
     this.state = {
-      movies: null,
+      movies: [],
       selectedMovie: null
     };
   }
 
   componentDidMount() {
-    axios.get('<evening-brushlands-63613/movies>')
+    axios.get('https://evening-brushlands-63613.herokuapp.com/movies')
       .then(response => {
         this.setState({
           movies: response.data
