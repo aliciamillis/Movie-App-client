@@ -33,7 +33,7 @@ export class MovieView extends React.Component {
             </Card.Text>
             <Card.Text>
               <span>Director: </span>
-              <span className='value'>{movie.director.name}</span>
+              <span className='value'>{movie.director.director}</span>
             </Card.Text>
             <Button onClick={() => onClick()} variant='primary'>
               Back
@@ -59,6 +59,6 @@ MovieView.propTypes = {
     }),
     Featured: PropTypes.bool.isRequired,
     ImagePath: PropTypes.string.isRequired
-  }).isRequired,
+  }),
   onClick: PropTypes.func.isRequired
 };
