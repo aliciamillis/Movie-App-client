@@ -10,17 +10,11 @@ export class MovieCard extends React.Component {
     const { movie, onClick } = this.props;
 
     return (
-      <Card
-        onClick={() => onClick(movie)}
-        border='danger'
-        style={{ width: '200', height: 'auto' }}
-      >
-        <Card.Header>{movie.title}</Card.Header>
-        <img
-          className='movie-poster'
-          src={movie.imagePath}
-          alt='movie poster'
-        />
+      <Card onClick={() => onClick(movie)}>
+        <Card.Img className='movie-poster' src={movie.imagePath} />
+        <Card.Body>
+          <Card.Title>{movie.Title}</Card.Title>
+        </Card.Body>
       </Card>
     );
   }
@@ -40,6 +34,6 @@ MovieCard.propTypes = {
     }),
     Featured: PropTypes.bool.isRequired,
     ImagePath: PropTypes.string.isRequired
-  }).isRequired,
+  }),
   onClick: PropTypes.func.isRequired
 };

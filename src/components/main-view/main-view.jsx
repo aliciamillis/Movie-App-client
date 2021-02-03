@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 import { LoginView } from '../login-view/login-view';
 import { RegisterView } from '../registration-view/registration-view';
@@ -99,3 +100,20 @@ export class MainView extends React.Component {
     );
   }
 }
+MainView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired
+    }),
+    Director: PropTypes.shape({
+      Bio: PropTypes.string.isRequired,
+      Birth: PropTypes.string.isRequired
+    }),
+    Featured: PropTypes.bool.isRequired,
+    ImagePath: PropTypes.string.isRequired
+  }),
+  onClick: PropTypes.func.isRequired
+};
