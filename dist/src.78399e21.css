@@ -16,8 +16,8 @@
   width: 250px;
 }
 .movie-poster {
-  height: 250px;
-  width: 100%;
+  height: 300px;
+  width: auto;
   cursor: pointer;
 }
 .movie-view {
@@ -26,6 +26,12 @@
   justify-content: center;
   margin-bottom: 300px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.movie-poster {
+  height: 300px;
+  width: auto;
+  cursor: pointer;
 }
 .main-body {
   margin-top: 100px;

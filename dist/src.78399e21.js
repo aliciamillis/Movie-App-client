@@ -48062,7 +48062,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
         }
       }, _react.default.createElement(_reactBootstrap.Card.Img, {
         className: "movie-poster",
-        src: movie.imagePath
+        src: movie.ImagePath
       }), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, movie.Title)));
     }
   }]);
@@ -48079,10 +48079,9 @@ MovieCard.propTypes = {
       Name: _propTypes.default.string.isRequired,
       Description: _propTypes.default.string.isRequired
     }),
-    Director: _propTypes.default.shape({
-      Bio: _propTypes.default.string.isRequired,
-      Birth: _propTypes.default.string.isRequired
-    }),
+    Director: _propTypes.default.string.isRequired,
+    Bio: _propTypes.default.string.isRequired,
+    Birth: _propTypes.default.string.isRequired,
     Featured: _propTypes.default.bool.isRequired,
     ImagePath: _propTypes.default.string.isRequired
   }),
@@ -48139,13 +48138,9 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MovieView);
 
   function MovieView() {
-    var _this;
-
     _classCallCheck(this, MovieView);
 
-    _this = _super.call(this);
-    _this.state = {};
-    return _this;
+    return _super.apply(this, arguments);
   }
 
   _createClass(MovieView, [{
@@ -48157,24 +48152,13 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       if (!movie) return null;
       return _react.default.createElement("div", {
         className: "movie-view"
-      }, _react.default.createElement(_reactBootstrap.Card, {
-        style: {
-          width: '18'
-        }
-      }, _react.default.createElement(_reactBootstrap.Card.Img, {
-        variant: "top",
-        src: movie.imagePath
-      }), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, movie.title), _react.default.createElement(_reactBootstrap.Card.Text, null, _react.default.createElement("span", null, "Description: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.description)), _react.default.createElement(_reactBootstrap.Card.Text, null, _react.default.createElement("span", null, "Genre: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.genre.name)), _react.default.createElement(_reactBootstrap.Card.Text, null, _react.default.createElement("span", null, "Director: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.director.director)), _react.default.createElement(_reactBootstrap.Button, {
+      }, _react.default.createElement(_reactBootstrap.Card, null, _react.default.createElement(_reactBootstrap.Card.Img, {
+        className: "movie-poster",
+        src: movie.ImagePath
+      }), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, movie.title), _react.default.createElement(_reactBootstrap.Card.Text, null, _react.default.createElement("span", null, "Description: ", movie.description)), _react.default.createElement(_reactBootstrap.Card.Text, null, _react.default.createElement("span", null, "Genre: ", movie.genre)), _react.default.createElement(_reactBootstrap.Card.Text, null, _react.default.createElement("span", null, "Director: ", movie.director, movie.bio, movie.birth)), _react.default.createElement(_reactBootstrap.Card.Text, null, _react.default.createElement("span", null, "Featured:", movie.featured)), _react.default.createElement(_reactBootstrap.Button, {
         onClick: function onClick() {
           return _onClick();
-        },
-        variant: "primary"
+        }
       }, "Back"))));
     }
   }]);
@@ -48191,10 +48175,9 @@ MovieView.propTypes = {
       Name: _propTypes.default.string.isRequired,
       Description: _propTypes.default.string.isRequired
     }),
-    Director: _propTypes.default.shape({
-      Bio: _propTypes.default.string.isRequired,
-      Birth: _propTypes.default.string.isRequired
-    }),
+    Director: _propTypes.default.string.isRequired,
+    Bio: _propTypes.default.string.isRequired,
+    Birth: _propTypes.default.string.isRequired,
     Featured: _propTypes.default.bool.isRequired,
     ImagePath: _propTypes.default.string.isRequired
   }),
@@ -48288,6 +48271,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         console.log(error);
       });
     }
+    /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
+
   }, {
     key: "onMovieClick",
     value: function onMovieClick(movie) {
@@ -48295,6 +48280,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         selectedMovie: movie
       });
     }
+    /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
+
   }, {
     key: "onLoggedIn",
     value: function onLoggedIn(user) {
@@ -48302,6 +48289,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         user: user
       });
     }
+    /* when user registers*/
+
   }, {
     key: "onRegister",
     value: function onRegister(register) {
@@ -48309,6 +48298,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         register: register
       });
     }
+    /* When back button click selectedMovie will set on it's initial state*/
+
   }, {
     key: "setInititalState",
     value: function setInititalState() {
@@ -48342,7 +48333,29 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
       return _react.default.createElement("div", {
         className: "main-view"
-      }, _react.default.createElement("div", {
+      }, _react.default.createElement("header", null, _react.default.createElement(_reactBootstrap.Navbar, {
+        collapseOnSelect: true,
+        expand: "lg",
+        bg: "dark",
+        variant: "dark",
+        fixed: "top"
+      }, _react.default.createElement(_reactBootstrap.Navbar.Brand, {
+        href: "#home"
+      }), _react.default.createElement(_reactBootstrap.Navbar.Toggle, {
+        "aria-controls": "responsive-navbar-nav"
+      }), _react.default.createElement(_reactBootstrap.Navbar.Collapse, {
+        id: "responsive-navbar-nav"
+      }, _react.default.createElement(_reactBootstrap.Nav, {
+        className: "mr-auto"
+      }, _react.default.createElement(_reactBootstrap.Nav.Link, {
+        href: "#movies"
+      }, "Movies"), _react.default.createElement(_reactBootstrap.Nav.Link, {
+        href: "#genre"
+      }, "Genre"), _react.default.createElement(_reactBootstrap.Nav.Link, {
+        href: "#director"
+      }, "Director"), _react.default.createElement(_reactBootstrap.Nav.Link, {
+        href: "#login"
+      }, "Logout"))))), _react.default.createElement("div", {
         className: "main-body text-center"
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie,
@@ -48369,23 +48382,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MainView = MainView;
-MainView.propTypes = {
-  movie: _propTypes.default.shape({
-    Title: _propTypes.default.string.isRequired,
-    Description: _propTypes.default.string.isRequired,
-    Genre: _propTypes.default.shape({
-      Name: _propTypes.default.string.isRequired,
-      Description: _propTypes.default.string.isRequired
-    }),
-    Director: _propTypes.default.shape({
-      Bio: _propTypes.default.string.isRequired,
-      Birth: _propTypes.default.string.isRequired
-    }),
-    Featured: _propTypes.default.bool.isRequired,
-    ImagePath: _propTypes.default.string.isRequired
-  }),
-  onClick: _propTypes.default.func.isRequired
-};
 },{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","../login-view/login-view":"components/login-view/login-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","./main-view.scss":"components/main-view/main-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -48480,7 +48476,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49278" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50916" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
