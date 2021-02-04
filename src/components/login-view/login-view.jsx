@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import './login-view.scss';
 
-// import axios from 'axios';
+import axios from 'axios';
 
 
 export function LoginView(props) {
@@ -11,20 +12,20 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // /* Send a request to the server for authentication */
-    // axios.post('https://evening-brushlands-63613.herokuapp.com/login', {
-    // Username: username,
-    //   Password: password
-    // })
-    // .then(response => {
-    //   const data = response.data;
-    props.onLoggedIn(username);
+    /* Send a request to the server for authentication */
+    axios.post('https://evening-brushlands-63613.herokuapp.com/login', {
+      Username: username,
+      Password: password
+    })
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('no such user')
+      });
   };
-  //     })
-  //     .catch(e => {
-  //       console.log('no such user')
-  //     });
-  // };
+
 
   return (
     <form className="form-login">
@@ -41,3 +42,11 @@ export function LoginView(props) {
     </form>
   );
 }
+
+LoginView.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }),
+  onLoggedIn: PropTypes.func.isRequired,
+};
