@@ -32643,6 +32643,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+// import axios from 'axios';
 function LoginView(props) {
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -32655,15 +32656,27 @@ function LoginView(props) {
       setPassword = _useState4[1];
 
   var handleSubmit = function handleSubmit(e) {
-    e.preventDefault();
-    console.log(username, password); // Send a request to the server for authentication then call props.onLoggedIn(username)
+    e.preventDefault(); // /* Send a request to the server for authentication */
+    // axios.post('https://evening-brushlands-63613.herokuapp.com/login', {
+    // Username: username,
+    //   Password: password
+    // })
+    // .then(response => {
+    //   const data = response.data;
 
     props.onLoggedIn(username);
-  };
+  }; //     })
+  //     .catch(e => {
+  //       console.log('no such user')
+  //     });
+  // };
+
 
   return _react.default.createElement("form", {
     className: "form-login"
-  }, _react.default.createElement("label", null, "Username:", _react.default.createElement("input", {
+  }, _react.default.createElement("label", {
+    className: "h1"
+  }, " Welcome to the Movie App! Please sign in: "), _react.default.createElement("label", null, "Username:", _react.default.createElement("input", {
     type: "text",
     value: username,
     onChange: function onChange(e) {
@@ -32677,6 +32690,7 @@ function LoginView(props) {
     }
   })), _react.default.createElement("button", {
     type: "button",
+    className: "button",
     onClick: handleSubmit
   }, "Submit"));
 }
@@ -48156,6 +48170,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "movie-poster",
         src: movie.ImagePath
       }), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, null, movie.title), _react.default.createElement(_reactBootstrap.Card.Text, null, _react.default.createElement("span", null, "Description: ", movie.description)), _react.default.createElement(_reactBootstrap.Card.Text, null, _react.default.createElement("span", null, "Genre: ", movie.genre)), _react.default.createElement(_reactBootstrap.Card.Text, null, _react.default.createElement("span", null, "Director: ", movie.director, movie.bio, movie.birth)), _react.default.createElement(_reactBootstrap.Card.Text, null, _react.default.createElement("span", null, "Featured:", movie.featured)), _react.default.createElement(_reactBootstrap.Button, {
+        className: "button",
         onClick: function onClick() {
           return _onClick();
         }
@@ -48253,8 +48268,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       movies: [],
       selectedMovie: null,
       user: null,
-      register: null
+      register: true
     };
+    _this.onMovieClick = _this.onMovieClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -48264,6 +48280,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       _axios.default.get('https://evening-brushlands-63613.herokuapp.com/movies').then(function (response) {
+        console.log("response.data", response.data);
+
         _this2.setState({
           movies: response.data
         });
@@ -48476,7 +48494,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50916" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62915" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

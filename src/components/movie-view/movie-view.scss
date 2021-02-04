@@ -2,12 +2,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 300px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
+  margin-bottom: 100px;
+  font-family: 'Comfortaa', cursive;
+  background-color: #e4ecf0;
+
+  }
 
 .movie-poster {
   height: 300px;
   width: auto;
   cursor: pointer;
+  
+}
+
+.button {
+  border: none;
+  display: inline-block;
+  font-family: 'Comfortaa', cursive;
+  background-color: #dbdbd3;
+  color: black;
+  text-decoration: none;
+  padding: 20px;
+  border-radius: 3px;
+  border-bottom: 2px solid rgba(0,0,0,0.3);
+  transition: 0.2s opacity;
+  margin-bottom: 10px;
+  text-align: center;
 }

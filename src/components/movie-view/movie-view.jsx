@@ -30,7 +30,7 @@ export class MovieView extends React.Component {
             <Card.Text>
               <span>Featured:{movie.featured}</span>
             </Card.Text>
-            <Button onClick={() => onClick()}>
+            <Button className='button' onClick={() => onClick()}>
               Back
             </Button>
           </Card.Body>

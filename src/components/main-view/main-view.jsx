@@ -20,13 +20,16 @@ export class MainView extends React.Component {
       movies: [],
       selectedMovie: null,
       user: null,
-      register: null
+      register: true
     };
+
+    this.onMovieClick = this.onMovieClick.bind(this)
   }
 
   componentDidMount() {
     axios.get('https://evening-brushlands-63613.herokuapp.com/movies')
       .then(response => {
+        console.log("response.data", response.data)
         this.setState({
           movies: response.data
         });
@@ -35,6 +38,7 @@ export class MainView extends React.Component {
         console.log(error);
       });
   }
+
 
   /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
   onMovieClick(movie) {
