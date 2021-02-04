@@ -11,7 +11,7 @@ export class MovieCard extends React.Component {
 
     return (
       <Card onClick={() => onClick(movie)}>
-        <Card.Img className='movie-poster' src={movie.imagePath} />
+        <Card.Img className='movie-poster' src={movie.ImagePath} />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
         </Card.Body>
@@ -28,10 +28,9 @@ MovieCard.propTypes = {
       Name: PropTypes.string.isRequired,
       Description: PropTypes.string.isRequired
     }),
-    Director: PropTypes.shape({
-      Bio: PropTypes.string.isRequired,
-      Birth: PropTypes.string.isRequired
-    }),
+    Director: PropTypes.string.isRequired,
+    Bio: PropTypes.string.isRequired,
+    Birth: PropTypes.string.isRequired,
     Featured: PropTypes.bool.isRequired,
     ImagePath: PropTypes.string.isRequired
   }),

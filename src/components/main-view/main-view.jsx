@@ -9,7 +9,7 @@ import { MovieView } from '../movie-view/movie-view';
 
 import './main-view.scss';
 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Nav, Navbar } from 'react-bootstrap';
 
 export class MainView extends React.Component {
 
@@ -20,13 +20,16 @@ export class MainView extends React.Component {
       movies: [],
       selectedMovie: null,
       user: null,
-      register: null
+      register: true
     };
+
+    this.onMovieClick = this.onMovieClick.bind(this)
   }
 
   componentDidMount() {
     axios.get('https://evening-brushlands-63613.herokuapp.com/movies')
       .then(response => {
+        console.log("response.data", response.data)
         this.setState({
           movies: response.data
         });
@@ -35,24 +38,30 @@ export class MainView extends React.Component {
         console.log(error);
       });
   }
+
+
+  /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
     });
   }
 
+  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
   onLoggedIn(user) {
     this.setState({
       user
     });
   }
 
+  /* when user registers*/
   onRegister(register) {
     this.setState({
       register,
     });
   }
 
+  /* When back button click selectedMovie will set on it's initial state*/
   setInititalState() {
     this.setState({
       selectedMovie: null,
@@ -74,6 +83,26 @@ export class MainView extends React.Component {
 
     return (
       <div className='main-view'>
+        <header>
+          <Navbar
+            collapseOnSelect
+            expand='lg'
+            bg='dark'
+            variant='dark'
+            fixed='top'
+          >
+            <Navbar.Brand href='#home'></Navbar.Brand>
+            <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+            <Navbar.Collapse id='responsive-navbar-nav'>
+              <Nav className='mr-auto'>
+                <Nav.Link href='#movies'>Movies</Nav.Link>
+                <Nav.Link href='#genre'>Genre</Nav.Link>
+                <Nav.Link href='#director'>Director</Nav.Link>
+                <Nav.Link href='#login'>Logout</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+        </header>
         <div className='main-body text-center'>
           {selectedMovie ? (
             <MovieView
@@ -100,20 +129,3 @@ export class MainView extends React.Component {
     );
   }
 }
-MainView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired
-    }),
-    Director: PropTypes.shape({
-      Bio: PropTypes.string.isRequired,
-      Birth: PropTypes.string.isRequired
-    }),
-    Featured: PropTypes.bool.isRequired,
-    ImagePath: PropTypes.string.isRequired
-  }),
-  onClick: PropTypes.func.isRequired
-};
