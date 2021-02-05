@@ -2,11 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { LoginView } from '../login-view/login-view';
 import { RegisterView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import { DirectorView } from '../director-view/director-view';
+import { GenreView } from '../genre-view/genre-view';
+import { ProfileView } from '../profile-view/profile-view';
 
 import './main-view.scss';
 
@@ -109,17 +112,17 @@ export class MainView extends React.Component {
         <div className="main-view">
           <Navbar expand="lg" className="navbar" sticky="top">
             <Navbar.Brand as={Link} to="/" className="navbar-brand">
-              <h1 className="app-name">Movie Appx</h1>
+              <h1 className="app-name">Movie App</h1>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-              <Nav.Link as={Link} to={pathMovies} className="link-text">
+              <Nav.Link className="link-button" as={Link} to={pathMovies} className="link-text">
                 Movies
 							</Nav.Link>
-              <Nav.Link as={Link} to={pathProfile} className="link-text">
+              <Nav.Link className="link-button" as={Link} to={pathProfile} className="link-text">
                 Profile
 							</Nav.Link>
-              <Nav.Link onClick={() => this.onLoggedOut()} as={Link} to={pathMovies} className="link-text">
+              <Nav.Link className="link-button" onClick={() => this.onLoggedOut()} as={Link} to={pathMovies} className="link-text">
                 Log Out
 							</Nav.Link>
             </Navbar.Collapse>
@@ -130,7 +133,8 @@ export class MainView extends React.Component {
             path="/"
             render={() => {
               if (!user) return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
-              return movies.map((m) => <MovieCard key={m._id} movie={m} />);
+              return <Row>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}
+              </Row>
             }}
           />
           <Route path="/register" render={() => <RegistrationView />} />
@@ -146,7 +150,7 @@ export class MainView extends React.Component {
 
           <Route
             exact
-            path="/directors"
+            path="/movies/directors"
             render={({ match }) => {
               if (!movies) return <div className="main-view" />;
               return <DirectorView director={movies.find((m) => m.Director === match.params.director).Director} />;

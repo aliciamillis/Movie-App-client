@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
+import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 
 import './movie-view.scss';
 
@@ -14,33 +14,34 @@ export class MovieView extends React.Component {
 
     return (
       <div className='movie-view'>
-        <Card>
-          <Card.Img className='movie-poster' src={movie.ImagePath} />
-          <Card.Body>
-            <Card.Title>{movie.title}</Card.Title>
-            <Card.Text>
-              <span>Description:{movie.description}</span>
-            </Card.Text>
-            <Card.Text>
-              <span>Genre:{movie.genre}</span>
-            </Card.Text>
-            <Link to={`/genres/${movie.Genre.Name}`}>
-              <Button variant="link">Genre</Button>
-            </Link>
-            <Card.Text>
-              <span>Director:{movie.director}{movie.bio}{movie.birth}</span>
-            </Card.Text>
-            <Link to={`/directors/${movie.Director}`}>
-              <Button variant="link">Director</Button>
-            </Link>
-            <Card.Text>
-              <span>Featured:{movie.featured}</span>
-            </Card.Text>
-            <Button className='button' onClick={() => onClick()}>
-              Back
-            </Button>
-          </Card.Body>
-        </Card>
+        <Container>
+          <Row>
+            <Col md={6}>
+              <Card>
+                <Card.Img className='movie-poster' src={movie.ImagePath} />
+                <Card.Body>
+                  <Card.Title>{movie.Title}</Card.Title>
+                  <Card.Text>
+                    <span>Description:<br></br>{movie.Description}</span>
+                  </Card.Text>
+
+                  <Link to={`/genres/${movie.Genre.Name}`}>
+                    <Button variant="link">Genre:</Button>
+                  </Link>
+                  <Card.Text>{movie.Genre.Name}</Card.Text>
+
+                  <Link to={`/directors/${movie.Director}`}>
+                    <Button variant="link">Director</Button>
+                  </Link>
+                  <Card.Text>{movie.Director}</Card.Text>
+                  <Button className='button' onClick={() => onClick()}>
+                    Back
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+
+          </Row></Container>
       </div>
     );
   }
@@ -60,5 +61,4 @@ MovieView.propTypes = {
     Featured: PropTypes.bool.isRequired,
     ImagePath: PropTypes.string.isRequired
   }),
-  onClick: PropTypes.func.isRequired
 };
