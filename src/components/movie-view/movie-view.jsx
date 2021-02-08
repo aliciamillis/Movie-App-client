@@ -34,9 +34,11 @@ export class MovieView extends React.Component {
                     <Button variant="link">Director</Button>
                   </Link>
                   <Card.Text>{movie.Director}</Card.Text>
-                  <Button className='button' onClick={() => onClick()}>
-                    Back
+                  <Link to={`/`}>
+                    <Button className='button' variant="link">
+                      Back
                   </Button>
+                  </Link>
                 </Card.Body>
               </Card>
             </Col>

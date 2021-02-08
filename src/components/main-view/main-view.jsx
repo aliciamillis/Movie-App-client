@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { LoginView } from '../login-view/login-view';
-import { RegisterView } from '../registration-view/registration-view';
+import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
@@ -137,23 +137,33 @@ export class MainView extends React.Component {
               </Row>
             }}
           />
-          <Route path="/register" render={() => <RegistrationView />} />
+          <Route
+            exact
+            path="/register/"
+            render={() => {
+              if (!user) return <RegistrationView onRegister={(register) => this.onRegister(register)} />;
+              return <Row>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}
+              </Row>
+            }}
+          />
+
           <Route path="/movies/:movieID" render={({ match }) => <MovieView movie={movies.find((m) => m._id === match.params.movieID)} />} />
+
           <Route
             exact
             path="/genres/:name"
             render={({ match }) => {
               if (!movies) return <div className="main-view" />;
-              return <GenreView genre={movies.find((m) => m.Genre.Name === match.params.name).Genre} />;
+              return <GenreView movie={movies.find((m) => m.Genre.Name === match.params.name)} />;
             }}
           />
 
           <Route
             exact
-            path="/movies/directors"
+            path="/directors/:director"
             render={({ match }) => {
               if (!movies) return <div className="main-view" />;
-              return <DirectorView director={movies.find((m) => m.Director === match.params.director).Director} />;
+              return <DirectorView movie={movies.find((m) => m.Director === match.params.director)} />;
             }}
           />
 
