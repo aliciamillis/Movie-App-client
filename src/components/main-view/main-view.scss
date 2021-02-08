@@ -5,6 +5,16 @@
 }
 
 .link-button{
-  font-family: 'Montserrat', sans-serif;
-  color: #5c5959;
-}
+    border: none;
+    display: inline-block;
+    font-family: 'Comfortaa', cursive;
+    background-color: #dbdbd3;
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 2px;
+    border-bottom: 2px solid rgba(0,0,0,0.3);
+    transition: 0.2s opacity;
+    margin-bottom: 5px;
+    text-align: center;
+  }

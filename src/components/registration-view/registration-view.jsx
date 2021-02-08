@@ -8,21 +8,6 @@ import { Link } from "react-router-dom";
 
 import './registration-view.scss';
 
-// export class RegisterView extends React.Component {
-//   constructor() {
-//     super();
-
-//     this.state = {};
-//   }
-
-// render() {
-//   const { register } = this.props;
-
-//   if (user) return <div className="user-view" />;
-//   const pathProfile = `/users/${user}`;
-
-//   return (
-
 export function RegistrationView() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -31,16 +16,7 @@ export function RegistrationView() {
   const [birthday, setBirthday] = useState('');
 
   const handleSubmit = (e) => {
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-      setValidated(true);
-      return;
-    }
-
     e.preventDefault();
-
     axios.post(`https://evening-brushlands-63613.herokuapp.com/users`, {
       Username: username,
       Password: password,
@@ -51,12 +27,10 @@ export function RegistrationView() {
         const data = response.data;
         console.log(data);
         window.open('/', '_self');
-
       })
       .catch(e => {
         console.log('error registering the user')
       });
-
   };
 
   return (

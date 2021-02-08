@@ -1,3 +1,24 @@
+.movie-poster {
+  height: 300px;
+  width: auto;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+}
+
+.button {
+  border: none;
+  display: inline-block;
+  font-family: "Comfortaa", cursive;
+  background-color: #dbdbd3;
+  color: black;
+  text-decoration: none;
+  padding: 20px;
+  border-radius: 3px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  transition: 0.2s opacity;
+  margin-bottom: 10px;
+  text-align: center;
+}
 .form-login {
   min-height: 100vh;
   display: flex;
@@ -40,27 +61,6 @@
 }
 .form-register #formBasicBirthday {
   width: 250px;
-}
-.movie-poster {
-  height: 300px;
-  width: auto;
-  cursor: pointer;
-  font-family: "Montserrat", sans-serif;
-}
-
-.button {
-  border: none;
-  display: inline-block;
-  font-family: "Comfortaa", cursive;
-  background-color: #dbdbd3;
-  color: black;
-  text-decoration: none;
-  padding: 20px;
-  border-radius: 3px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-  transition: 0.2s opacity;
-  margin-bottom: 10px;
-  text-align: center;
 }
 .movie-view {
   display: flex;
@@ -151,8 +151,18 @@ h1 {
 }
 
 .link-button {
-  font-family: "Montserrat", sans-serif;
-  color: #5c5959;
+  border: none;
+  display: inline-block;
+  font-family: "Comfortaa", cursive;
+  background-color: #dbdbd3;
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 2px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  transition: 0.2s opacity;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */

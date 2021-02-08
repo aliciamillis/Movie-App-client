@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './director-view.scss';
-import { Row, Container, Card, ListGroup } from 'react-bootstrap';
+import { Row, Container, Card, ListGroup, Button } from 'react-bootstrap';
 
 import { Link } from "react-router-dom";
 
@@ -29,12 +29,17 @@ export class DirectorView extends React.Component {
               <Link to={`/directors/${movie.Bio}`}></Link>
               <ListGroup variant="flush" className="card-content">
                 <ListGroup.Item className="director-yob director-details">
-                  <span className="label">Birth Year</span>
+                  <span className="label">Birthdate</span>
                   <br />
                   {movie.Birth}
                   <br />
                 </ListGroup.Item>
               </ListGroup>
+              <Link to={`/movies/${movie._id}`}>
+                <Button className='button' variant="link">
+                  Back
+                </Button>
+              </Link>
             </Card>
           </Row>
         </Container>
