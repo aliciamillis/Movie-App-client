@@ -130,9 +130,6 @@ export class MainView extends React.Component {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-              <Link to={`/register`}>
-                <Button className="link-button">Register</Button>
-              </Link>
               <Link to={`/`}>
                 <Button className="link-button">Movies</Button>
               </Link>
@@ -153,7 +150,7 @@ export class MainView extends React.Component {
             path="/"
             render={() => {
               if (!user) return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
-              return <Row><MoviesList movies={movies} />
+              return <Row>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}
               </Row>
             }}
           />
@@ -195,13 +192,6 @@ export class MainView extends React.Component {
               if (movies.length === 0) return;
               return <ProfileView movies={movies} />;
             }}
-          />
-
-          <Route
-            path="/users/:username"
-            render={() => (
-              <ProfileView movies={movies} logOutFunc={() => this.logOut()} />
-            )}
           />
         </div>
       </Router>
