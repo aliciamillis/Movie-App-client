@@ -42,7 +42,7 @@ export function LoginView(props) {
       </label>
       <button type="button" className="button" onClick={handleSubmit}>Submit</button>
       <label> OR </label>
-      <a href="/register" className="button">Register</a>
+      <a href="https://evening-brushlands-63613.herokuapp.com/register" className="button">Register</a>
     </form>
   );
 }
