@@ -36,7 +36,20 @@ export class MainView extends React.Component {
       register: true
     };
 
-    this.onMovieClick = this.onMovieClick.bind(this)
+    // this.onMovieClick = this.onMovieClick.bind(this)
+  }
+  /* new method to get movies from token auth*/
+  getMovies(token) {
+    axios.get('https://evening-brushlands-63613.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        // Assign the result to the state
+        this.props.setMovies(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   componentDidMount() {
@@ -70,6 +83,15 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  logOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("id");
+    this.setState({
+      user: null,
+    });
+  }
+
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -78,19 +100,6 @@ export class MainView extends React.Component {
     });
   }
 
-  /* new method to get movies from token auth*/
-  getMovies(token) {
-    axios.get('https://evening-brushlands-63613.herokuapp.com/movies', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        // Assign the result to the state
-        this.props.setMovies(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
 
   /* when user registers*/
   onRegister(register) {
@@ -106,14 +115,6 @@ export class MainView extends React.Component {
     });
   }
 
-  logOut() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("id");
-    this.setState({
-      user: null,
-    });
-  }
 
   render() {
 
@@ -152,7 +153,7 @@ export class MainView extends React.Component {
             path="/"
             render={() => {
               if (!user) return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
-              return <Row><MovieList movies={movies} />
+              return <Row><MoviesList movies={movies} />
               </Row>
             }}
           />

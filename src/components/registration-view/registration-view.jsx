@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import { Form, Button } from 'react-bootstrap';
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 import './registration-view.scss';
 
-export function RegistrationView() {
+export function RegistrationView(props) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +17,7 @@ export function RegistrationView() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`https://evening-brushlands-63613.herokuapp.com/users`, {
+    axios.post('https://evening-brushlands-63613.herokuapp.com/users', {
       Username: username,
       Password: password,
       Email: email,
@@ -84,19 +84,27 @@ export function RegistrationView() {
           />
         </Form.Group>
 
-        <Button onClick={handleSubmit} variant='primary' type='submit'>
+        <Button onClick={handleSubmit} variant='primary' className="button" type='submit'>
           Submit
         </Button>
+
+        <Link to={`/`}>
+          <Button
+            variant='primary'
+            className="button"
+          >
+            Existing User Sign In</Button>
+        </Link>
       </Form>
     </React.Fragment>
   );
 }
 
-RegistrationView.propTypes = {
-  user: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    birthday: PropTypes.string,
-  }),
-};
+// RegistrationView.propTypes = {
+//   user: PropTypes.shape({
+//     username: PropTypes.string.isRequired,
+//     password: PropTypes.string.isRequired,
+//     email: PropTypes.string.isRequired,
+//     birthday: PropTypes.string,
+//   }),
+// };
