@@ -5,6 +5,8 @@ import './login-view.scss';
 
 import axios from 'axios';
 
+import { Button } from 'react-bootstrap';
+
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -39,6 +41,8 @@ export function LoginView(props) {
         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label>
       <button type="button" className="button" onClick={handleSubmit}>Submit</button>
+      <label> OR </label>
+      <a href="/register" className="button">Register</a>
     </form>
   );
 }

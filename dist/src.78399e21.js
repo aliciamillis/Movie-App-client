@@ -53466,6 +53466,8 @@ require("./login-view.scss");
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _reactBootstrap = require("react-bootstrap");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -53530,7 +53532,10 @@ function LoginView(props) {
     type: "button",
     className: "button",
     onClick: handleSubmit
-  }, "Submit"));
+  }, "Submit"), _react.default.createElement("label", null, " OR "), _react.default.createElement("a", {
+    href: "/register",
+    className: "button"
+  }, "Register"));
 }
 
 LoginView.propTypes = {
@@ -53540,7 +53545,7 @@ LoginView.propTypes = {
   }),
   onLoggedIn: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./login-view.scss":"components/login-view/login-view.scss","axios":"../node_modules/axios/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./login-view.scss":"components/login-view/login-view.scss","axios":"../node_modules/axios/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -54613,10 +54618,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         id: "basic-navbar-nav",
         className: "justify-content-end"
       }, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/register"
-      }, _react.default.createElement(_reactBootstrap.Button, {
-        className: "link-button"
-      }, "Register")), _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
       }, _react.default.createElement(_reactBootstrap.Button, {
         className: "link-button"
@@ -54645,8 +54646,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
               return _this3.onLoggedIn(user);
             }
           });
-          return _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_moviesList.default, {
-            movies: movies
+          return _react.default.createElement(_reactBootstrap.Row, null, movies.map(function (m) {
+            return _react.default.createElement(_movieCard.MovieCard, {
+              key: m._id,
+              movie: m
+            });
           }));
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -54715,16 +54719,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           if (movies.length === 0) return;
           return _react.default.createElement(_profileView.ProfileView, {
             movies: movies
-          });
-        }
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/users/:username",
-        render: function render() {
-          return _react.default.createElement(_profileView.ProfileView, {
-            movies: movies,
-            logOutFunc: function logOutFunc() {
-              return _this3.logOut();
-            }
           });
         }
       })));
@@ -54910,7 +54904,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52951" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56386" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
