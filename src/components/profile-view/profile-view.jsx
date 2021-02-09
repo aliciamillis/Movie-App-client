@@ -3,12 +3,9 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import './profile-view.scss';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
-import CardDeck from 'react-bootstrap/CardDeck';
-import { Tabs, Tab } from 'react-bootstrap';
+import { Tabs, Tab, Form, Button, Container, Card, CardDeck } from 'react-bootstrap';
+
+import { Link } from "react-router-dom";
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -91,7 +88,7 @@ export class ProfileView extends React.Component {
 
     axios({
       method: 'put',
-      url: `https://evening-brushlands-63613.herokuapp.com/users/${user}`,
+      url: `https://evening-brushlands-63613.herokuapp.com/users/${username}`,
       headers: { Authorization: `Bearer ${token}` },
       data: {
         Username: newUsername ? newUsername : this.state.Username,
