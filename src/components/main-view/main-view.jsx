@@ -139,6 +139,9 @@ export class MainView extends React.Component {
               <Link to={`/`}>
                 <Button className="link-button" onClick={() => this.logOut()}> Logout</Button>
               </Link>
+              <Link to={`/register`}>
+                <Button className="link-button">Register</Button>
+              </Link>
               <Form inline>
                 <VisibilityFilterInput variant="outline-light" visibilityFilter={visibilityFilter} />
               </Form>

@@ -54,7 +54,7 @@ export class ProfileView extends React.Component {
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
     axios
-      .delete(`https://evening-brushlands-63613.herokuapp.com//users/${username}/Movies/${movie}`, {
+      .delete(`https://evening-brushlands-63613.herokuapp.com/users/${username}/Movies/${movie}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
