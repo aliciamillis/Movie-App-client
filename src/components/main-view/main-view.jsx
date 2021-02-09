@@ -2,7 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+import { setMovies } from '../../actions/actions';
+
+import MoviesList from '../movies-list/movies-list';
+import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
+
+
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -13,7 +22,7 @@ import { ProfileView } from '../profile-view/profile-view';
 
 import './main-view.scss';
 
-import { Container, Row, Col, Nav, Navbar } from 'react-bootstrap';
+import { Container, Row, Col, Nav, Navbar, Button, Form } from 'react-bootstrap';
 
 export class MainView extends React.Component {
 
@@ -76,9 +85,7 @@ export class MainView extends React.Component {
     })
       .then(response => {
         // Assign the result to the state
-        this.setState({
-          movies: response.data
-        });
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -99,32 +106,44 @@ export class MainView extends React.Component {
     });
   }
 
-  render() {
-    const { movies, selectedMovie, user, register } = this.state;
+  logOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("id");
+    this.setState({
+      user: null,
+    });
+  }
 
-    // Before the movies have been loaded
-    if (!movies) return <div className="main-view" />;
-    const pathMovies = `/`;
-    const pathProfile = `/users/${user}`;
+  render() {
+
+    let { movies, visibilityFilter } = this.props;
+    let { user } = this.state;
 
     return (
       <Router>
         <div className="main-view">
           <Navbar expand="lg" className="navbar" sticky="top">
-            <Navbar.Brand as={Link} to="/" className="navbar-brand">
+            <Navbar.Brand>
               <h1 className="app-name">Movie App</h1>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-              <Nav.Link className="link-button" as={Link} to={pathMovies} className="link-text">
-                Movies
-							</Nav.Link>
-              <Nav.Link className="link-button" as={Link} to={pathProfile} className="link-text">
-                Profile
-							</Nav.Link>
-              <Nav.Link className="link-button" onClick={() => this.onLoggedOut()} as={Link} to={pathMovies} className="link-text">
-                Log Out
-							</Nav.Link>
+              <Link to={`/register`}>
+                <Button className="link-button">Register</Button>
+              </Link>
+              <Link to={`/`}>
+                <Button className="link-button">Movies</Button>
+              </Link>
+              <Link to={`/users/${user}`}>
+                <Button className="link-button">Profile</Button>
+              </Link>
+              <Link to={`/`}>
+                <Button className="link-button" onClick={() => this.logOut()}> Logout</Button>
+              </Link>
+              <Form inline>
+                <VisibilityFilterInput variant="outline-light" visibilityFilter={visibilityFilter} />
+              </Form>
             </Navbar.Collapse>
           </Navbar>
 
@@ -133,7 +152,7 @@ export class MainView extends React.Component {
             path="/"
             render={() => {
               if (!user) return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
-              return <Row>{movies.map((m) => <MovieCard key={m._id} movie={m} />)}
+              return <Row><MovieList movies={movies} />
               </Row>
             }}
           />
@@ -176,26 +195,21 @@ export class MainView extends React.Component {
               return <ProfileView movies={movies} />;
             }}
           />
+
+          <Route
+            path="/users/:username"
+            render={() => (
+              <ProfileView movies={movies} logOutFunc={() => this.logOut()} />
+            )}
+          />
         </div>
       </Router>
     );
   }
 }
-MainView.propTypes = {
-  movie: PropTypes.arrayOf({
-    _id: PropTypes.string.isRequired,
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired,
-    }),
-    Director: PropTypes.string.isRequired,
-    Name: PropTypes.string.isRequired,
-    Bio: PropTypes.string.isRequired,
-    Birth: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired,
-    Featured: PropTypes.bool,
-  }),
-  user: PropTypes.string,
-};
+
+let mapStateToProps = state => {
+  return { movies: state.movies }
+}
+
+export default connect(mapStateToProps, { setMovies })(MainView);

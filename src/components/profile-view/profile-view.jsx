@@ -91,7 +91,7 @@ export class ProfileView extends React.Component {
 
     axios({
       method: 'put',
-      url: `https://evening-brushlands-63613.herokuapp.com/users/${username}`,
+      url: `https://evening-brushlands-63613.herokuapp.com/users/${user}`,
       headers: { Authorization: `Bearer ${token}` },
       data: {
         Username: newUsername ? newUsername : this.state.Username,
