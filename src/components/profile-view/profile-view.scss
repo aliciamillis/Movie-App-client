@@ -21,3 +21,22 @@ h1 {
   line-height: 1.6;
   color: #4f4a52;
 }
+
+.movie-card-deck {
+	margin-right: 5px;
+	display: inline-block;
+}
+
+.movie-card-title {
+	height: 35px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-weight: 700;
+}
+
+.card-content {
+	font-size: 16px;
+	font-weight: 500;
+}

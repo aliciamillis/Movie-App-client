@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import './login-view.scss';
 
 import axios from 'axios';
+import { RegistrationView } from '../registration-view/registration-view';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import { Button } from 'react-bootstrap';
 
@@ -26,8 +28,7 @@ export function LoginView(props) {
       .catch(e => {
         console.log('no such user')
       });
-  };
-
+  }
 
   return (
     <form className="form-login">
@@ -41,8 +42,6 @@ export function LoginView(props) {
         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label>
       <button type="button" className="button" onClick={handleSubmit}>Submit</button>
-      <label> OR </label>
-      <a href="https://evening-brushlands-63613.herokuapp.com/register" className="button">Register</a>
     </form>
   );
 }
